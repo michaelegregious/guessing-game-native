@@ -1,29 +1,83 @@
 import React from 'react';
-import { Text, View, TextInput, Button } from 'react-native';
+import { Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
 import styles from './styles';
-import Game, { makeAGuess } from './game.js';
+import Game from './game.js';
 
 export default class App extends React.Component {
+  constructor() {
+    super();
+    this.game = new Game();
+  }
+
   state = {
-    game: new Game(),
+    // game: new Game(),
     guess: '',
-    subTitle: 'Guess a number between 1-100'
+    hint: '',
+    pastGuesses: [],
+    subTitle: 'Guess a number between 1-100',
+    title: 'The Guessing Game',
+    toggle: false
   };
 
-  makeAGuess = input => {
-    let guess = Number(input);
-    let result = this.state.game.playersGuessSubmission(guess);
+  makeAGuess = () => {
+    console.log('this.state.guess', this.state.guess);
+    const guess = Number(this.state.guess);
+    console.log('guess', guess);
+    let result = this.game.playersGuessSubmission(guess);
+    console.log('result = ', result);
+    if (result == 'win') {
+      this.win(guess);
+    } else if (result == 'lose') {
+      this.lose(guess);
+    } else {
+      this.setState({
+        guess: '',
+        pastGuesses: this.game.pastGuesses,
+        subTitle: result
+      });
+    }
+  };
+
+  hints = () => {
+    this.setState({ hint: this.game.provideHint() });
+  };
+
+  reset = () => {
+    this.game = new Game();
     this.setState({
-      guess: '',
-      subTitle: result
+      // game: new Game(),
+      title: 'The Guessing Game',
+      toggle: false,
+      subTitle: 'Guess a number between 1-100'
     });
   };
 
-  reset = () => {};
+  win = num => {
+    this.setState({
+      title: 'YOU WIN!',
+      subTitle: `${num} is correct! Click RESET to play again!`,
+      toggle: true
+    });
+  };
 
-  hints = () => {};
+  lose = () => {
+    const win = this.game.winningNumber;
+    this.setState({
+      title: 'YOU LOSE',
+      subTitle: `The winning number was ${win}.`,
+      toggle: true
+    });
+  };
+
+  inputChange = input => {
+    this.setState({
+      guess: input
+    });
+  };
 
   render() {
+    const pastGuesses = this.game.pastGuesses;
+    const toggle = this.state.toggle;
     const nums = [1, 2, 3, 4, 5];
     return (
       <View style={{ flex: 1 }}>
@@ -34,12 +88,19 @@ export default class App extends React.Component {
           <View style={styles.inputParent}>
             <TextInput
               style={styles.input}
+              disabled={toggle}
               placeholder="#"
-              onChangeText={text => this.setState({ guess: text })}
+              value={this.state.guess}
+              onChangeText={g => this.setState({ guess: g })}
+              onSubmitEditing={() => this.makeAGuess()}
             />
-            <View style={styles.go} onIconClicked={this.makeAGuess}>
+            <TouchableOpacity
+              style={styles.go}
+              onPress={() => this.makeAGuess()}
+              disabled={toggle}
+            >
               <Text style={styles.goText}>Go!</Text>
-            </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.guessList}>
             <View style={styles.buffer} />
@@ -59,6 +120,7 @@ export default class App extends React.Component {
             />
             <Button
               onPress={this.hints}
+              disabled={toggle}
               title="Need a hint?"
               style={styles.hints}
               accessibilityLabel="Need a hint?"
