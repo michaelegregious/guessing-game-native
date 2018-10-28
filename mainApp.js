@@ -48,26 +48,4 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   main: {}
-
-  // container: {
-  //   flex: 2,
-  //   flexDirection: 'row',
-  //   backgroundColor: 'skyblue',
-  //   alignItems: 'center'
-  // },
-  // box: {
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   height: 50,
-  //   justifyContent: 'center',
-  //   borderColor: 'white',
-  //   borderWidth: 0.5
-  // },
-  // whiteText: {
-  //   paddingBottom: 20,
-  //   color: 'white',
-  //   fontSize: 20,
-  //   fontWeight: 'bold',
-  //   alignSelf: 'center'
-  // }
 });

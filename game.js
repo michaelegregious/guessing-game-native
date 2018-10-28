@@ -7,9 +7,8 @@ export default class Game {
   }
 
   playersGuessSubmission = num => {
-    console.log('num inside of playersGuess = ', num);
     if (isNaN(num) || num < 1 || num > 100) {
-      throw `Input ${num} is not a valid guess`;
+      return `${num} is not a valid guess`;
     }
     this.playersGuess = num;
     return this.checkGuess(num);
@@ -113,8 +112,8 @@ export default class Game {
       max = arr[index + 1] || 101;
 
     return [
-      getRandomInt(min, max),
-      getRandomInt(min, max),
+      _getRandomInt(min, max),
+      _getRandomInt(min, max),
       this.winningNumber
     ].sort((a, b) => a - b);
   };
@@ -122,4 +121,11 @@ export default class Game {
 
 _generateWinningNumber = () => {
   return Math.floor(Math.random() * 100) + 1;
+};
+
+_getRandomInt = (min, max) => {
+  //returns value EXCLUSIVE of either min or max
+  min = min + 1;
+  max = max - 1;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };

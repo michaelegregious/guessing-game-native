@@ -2,10 +2,11 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   box: {
-    flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     height: 50,
+    width: 50,
     justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'white',
     margin: 2,
     marginBottom: 20,
@@ -21,7 +22,7 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   container: {
-    flex: 8,
+    flex: 15,
     flexDirection: 'column',
     backgroundColor: '#e5d490',
     alignItems: 'center'
@@ -55,8 +56,14 @@ export default StyleSheet.create({
     marginTop: 25
   },
   hints: {
-    backgroundColor: '#39db73',
-    color: 'white'
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  hintText: {
+    marginTop: 15,
+    color: '#6294e5',
+    fontSize: 18,
+    fontWeight: 'bold'
   },
   inputParent: {
     backgroundColor: 'white',
@@ -77,23 +84,19 @@ export default StyleSheet.create({
   },
   reset: {},
   subTitle: {
-    color: 'white',
+    color: '#6294e5',
     fontSize: 18,
-    textShadowColor: 'grey',
-    textShadowOffset: { width: 1, height: 2 },
-    textShadowRadius: 2
+    fontWeight: 'bold'
   },
   title: {
-    color: 'white',
+    color: '#6294e5',
     fontSize: 30,
-    marginTop: 15,
-    textShadowColor: 'grey',
-    textShadowOffset: { width: 1, height: 2 },
-    textShadowRadius: 2
+    fontWeight: 'bold',
+    marginTop: 15
   },
-  whiteText: {
-    paddingBottom: 20,
-    color: 'white',
+  guess: {
+    alignSelf: 'center',
+    color: '#6294e5',
     fontSize: 20,
     alignSelf: 'center'
   }
