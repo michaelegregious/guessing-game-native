@@ -6,7 +6,7 @@ The following version is to run the app on your phone, and requires you to first
 
 ### Setup
 
-To run this app on your local machine, you'll need to
+To run this app on your local machine, you'll need to:
 
 1. Open your terminal
 2. cd Desktop (if you want to self-title your own folder complete step 3-6, otherwise skip to step 5)
